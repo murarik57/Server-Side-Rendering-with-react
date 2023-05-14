@@ -6,7 +6,7 @@ module.exports = {
 
     // tell webpack where to put the output file that is generated
     output: {
-        filename: "bundle.js",
+        filename: "clientBundle.js",
         path: path.resolve(__dirname, 'public')
 
     },

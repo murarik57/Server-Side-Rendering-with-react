@@ -1,16 +1,17 @@
-import React from 'react'
-import { renderToString } from 'react-dom/server'
-import Home from '../client/components/Home'
-import { StaticRouter } from 'react-router-dom'
-import Routes from "../client/Routes"
+import 'babel-polyfill';     // to get rid of generator runtime error due to babel not understaning async await in users action 
+import React from "react";
+import { renderToString } from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
+import Routes from "../client/Routes";
+import { Provider } from "react-redux";
 
-export default (req) => {
-    // const content = renderToString(<Home />)
+export default (req, store) => {
     const content = renderToString(
-        <StaticRouter location={req.path} context={{}}>
-            <Routes />
-        </StaticRouter>
-
+        <Provider store={store}>
+            <StaticRouter location={req.path} context={{}}>
+                <Routes />
+            </StaticRouter>
+        </Provider>
     );
 
     return `
@@ -18,8 +19,8 @@ export default (req) => {
     <head></head>
     <body>
     <div id="root">${content}</div>
-        <script src="bundle.js"></script>
+        <script src="clientBundle.js"></script>
     </body>
     </html>
-    `
-}
+    `;
+};

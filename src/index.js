@@ -1,14 +1,16 @@
 const express = require("express")
-// const React = require("react");
-// const renderToString = require('react-dom/server').renderToString;
-// const Home = require("./client/components/Home").default
 const renderer = require("./helpers/renderer").default
+const createStore = require("./helpers/createStore").default
 const app = express();
 
 app.use(express.static('public'))
 
 app.get('*', (req, res) => {
-    res.send(renderer(req))
+    const store = createStore();
+
+    // logic to initialize and load data into the store 
+
+    res.send(renderer(req, store))
 })
 
 app.listen(3000, () => {

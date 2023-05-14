@@ -10,7 +10,7 @@ module.exports = {
 
     // tell webpack where to put the output file that is generated
     output: {
-        filename: "bundle.js",
+        filename: "serverBundle.js",
         path: path.resolve(__dirname, 'build')
 
     },
